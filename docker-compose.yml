@@ -1,0 +1,21 @@
+services:
+  bff-api:
+    build:
+      context: .
+      dockerfile: BffAgenda.API/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      JWT_SECRET: 21b6e4dc-3616-4dab-9172-a46937961eee
+      JWT_EXPIRES_MINUTES: 30000
+      RABBITMQ_HOST: agenda_rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: guest
+      RABBITMQ_PASS: guest
+    networks:
+      - agenda-network
+
+networks:
+  agenda-network:
+    external: true
